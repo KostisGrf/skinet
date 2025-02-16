@@ -2751,8 +2751,8 @@
     },
     "Core/1.0.0": {
       "type": "project",
-      "path": "../Core/Core.csproj",
-      "msbuildProject": "../Core/Core.csproj"
+      "path": "../CORE/Core.csproj",
+      "msbuildProject": "../CORE/Core.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -2786,8 +2786,8 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "C:\\Users\\kosti\\Documents\\Github\\skinet\\Core\\Core.csproj": {
-              "projectPath": "C:\\Users\\kosti\\Documents\\Github\\skinet\\Core\\Core.csproj"
+            "C:\\Users\\kosti\\Documents\\Github\\skinet\\CORE\\Core.csproj": {
+              "projectPath": "C:\\Users\\kosti\\Documents\\Github\\skinet\\CORE\\Core.csproj"
             }
           }
         }

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\kosti\\Documents\\Github\\skinet\\Core\\Core.csproj": {}
+    "C:\\Users\\kosti\\Documents\\Github\\skinet\\CORE\\Core.csproj": {}
   },
   "projects": {
-    "C:\\Users\\kosti\\Documents\\Github\\skinet\\Core\\Core.csproj": {
+    "C:\\Users\\kosti\\Documents\\Github\\skinet\\CORE\\Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\kosti\\Documents\\Github\\skinet\\Core\\Core.csproj",
+        "projectUniqueName": "C:\\Users\\kosti\\Documents\\Github\\skinet\\CORE\\Core.csproj",
         "projectName": "Core",
-        "projectPath": "C:\\Users\\kosti\\Documents\\Github\\skinet\\Core\\Core.csproj",
+        "projectPath": "C:\\Users\\kosti\\Documents\\Github\\skinet\\CORE\\Core.csproj",
         "packagesPath": "C:\\Users\\kosti\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\kosti\\Documents\\Github\\skinet\\Core\\obj\\",
+        "outputPath": "C:\\Users\\kosti\\Documents\\Github\\skinet\\CORE\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\kosti\\AppData\\Roaming\\NuGet\\NuGet.Config"

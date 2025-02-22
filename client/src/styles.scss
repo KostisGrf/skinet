@@ -1,1 +1,20 @@
+@use '@angular/material' as mat;
+
+$custom-theme: mat.define-theme();
+
+
 @import "tailwindcss";
+
+
+
+@include mat.core();
+
+.custom-theme{
+  @include mat.all-component-themes($custom-theme);
+
+  .mdc-button,.mdc-raised-button,.mdc-stroked-button,.mdc-flat-button{
+    @apply rounded-md
+  }
+}
+
+

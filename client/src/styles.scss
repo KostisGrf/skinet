@@ -1,31 +1,26 @@
 @use '@angular/material' as mat;
 
+@import "tailwindcss";
 
 
-
-
-$custom-theme: mat.define-theme();
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-
+$customTheme: mat.define-theme();
 
 @include mat.core();
 
-.custom-theme{
-  @include mat.all-component-themes($custom-theme);
+.custom-theme {
+  @include mat.all-component-themes($customTheme);
 
-  .mdc-button,.mdc-raised-button,.mdc-stroked-button,.mdc-flat-button{
-    @apply rounded-md
+  // Tailwind override for Angular Material buttons
+  .mdc-button,
+  .mdc-raised-button,
+  .mdc-stroked-button,
+  .mdc-filled-button,
+  .mdc-outlined-button,
+  .mat-mdc-button {
+    @apply rounded-md;
   }
 }
 
 .container{
-  @apply mx-auto max-w-screen-2xl
+  @apply mx-auto max-w-screen-2xl;
 }
-
-
-
-
-

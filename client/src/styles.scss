@@ -29,4 +29,8 @@ $customTheme: mat.define-theme();
   color: #7d00fa;
 }
 
+.mdc-notched-outline__notch{
+  border-right-style: none !important ;
+}
+
 

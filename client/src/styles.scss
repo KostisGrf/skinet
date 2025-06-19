@@ -1,6 +1,6 @@
 @use '@angular/material' as mat;
 
-@import "tailwindcss";
+@import "tailwindcss" important;
 
 
 $customTheme: mat.define-theme();
@@ -24,3 +24,9 @@ $customTheme: mat.define-theme();
 .container{
   @apply mx-auto max-w-screen-2xl;
 }
+
+.text-primary{
+  color: #7d00fa;
+}
+
+

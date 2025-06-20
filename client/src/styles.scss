@@ -33,4 +33,16 @@ $customTheme: mat.define-theme();
   border-right-style: none !important ;
 }
 
+.snack-error{
+  --mat-snack-bar-container-color: red ;
+  --mat-snack-bar-button-color:#fff;
+  --mdc-snackbar-supporting-text-color:#fff;
+  
+}
+
+.snack-success{
+  --mat-snack-bar-container-color:green;
+  --mat-snack-bar-button-color:#fff;
+  --mdc-snackbar-supporting-text-color:#fff;
+}
 

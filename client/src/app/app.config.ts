@@ -7,6 +7,7 @@ import { errorInterceptor } from './core/interceptors/error.interceptor';
 import { loadingInterceptor } from './core/interceptors/loading.interceptor';
 import { InitService } from './core/services/init.service';
 import { lastValueFrom } from 'rxjs';
+import { authInterceptor } from './core/interceptors/auth.interceptor';
 
 function initilizeApp(InitService:InitService){
   return () => lastValueFrom(InitService.init()).finally(()=>{
@@ -21,7 +22,7 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }), 
     provideRouter(routes),
-    provideHttpClient(withInterceptors([errorInterceptor,loadingInterceptor])),
+    provideHttpClient(withInterceptors([errorInterceptor,loadingInterceptor,authInterceptor])),
     {
       provide: APP_INITIALIZER,
       useFactory: initilizeApp,

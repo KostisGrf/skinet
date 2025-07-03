@@ -91,6 +91,8 @@ public class PaymentsController(IPaymentService service,
 
             await unit.Complete();
 
+            logger.LogInformation($"database updated");
+
             var connectionId = NotificationHub.GetConnectionIdByEmail(order.buyerEmail);
 
             if (!string.IsNullOrEmpty(connectionId))

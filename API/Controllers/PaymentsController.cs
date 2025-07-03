@@ -95,6 +95,7 @@ public class PaymentsController(IPaymentService service,
 
             if (!string.IsNullOrEmpty(connectionId))
             {
+                logger.LogInformation($"Sending OrderCompleteNotification to connectionId: {connectionId}");
                 await hubContext.Clients.Client(connectionId).SendAsync("OrderCompleteNotification",order.ToDto());
             }
         }

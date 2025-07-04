@@ -1,4 +1,4 @@
-import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, effect, inject, OnDestroy, OnInit } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { RouterLink } from '@angular/router';
 import { SignalrService } from '../../../core/services/signalr.service';
@@ -28,6 +28,18 @@ export class CheckoutSuccessComponent implements OnDestroy ,OnInit  {
    private signalRService=inject(SignalrService);
    private orderService=inject(OrderService);
    order=this.signalRService.orderSignal();
+
+   constructor(){
+    effect(() => {
+      const order = this.signalRService.orderSignal();
+      if (order) {
+        this.order = order;
+                  }
+                });}
+
+   
+
+    
    
 
    ngOnInit(): void {

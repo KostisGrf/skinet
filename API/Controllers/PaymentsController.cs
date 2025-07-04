@@ -33,7 +33,7 @@ public class PaymentsController(IPaymentService service,
         return Ok(cart);
     }
 
-    [HttpGet("test-log")]
+    [HttpGet("testlog")]
 public IActionResult TestLog()
 {
     logger.LogInformation("🚀 Log stream is working!");

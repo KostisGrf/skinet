@@ -80,12 +80,15 @@ public IActionResult TestLog()
 
     private async Task HandlePaymentSucceded(PaymentIntent intent)
     {
+        
         if (intent.Status == "succeeded")
         {
             var spec = new OrderdSpecification(intent.Id, true);
 
             var order = await unit.Repository<Core.Entities.OrderAggregate.Order>().GetEntityWithSpec(spec)
                 ?? throw new Exception("Order not found");
+
+            logger.LogInformation("Resolved connectionId: for email: {Email}", order.buyerEmail);
 
             if ((long)order.GetTotal() * 100 != intent.Amount)
             {
@@ -105,7 +108,7 @@ public IActionResult TestLog()
             if (!string.IsNullOrEmpty(connectionId))
             {
                 logger.LogInformation($"Sending OrderCompleteNotification to connectionId: {connectionId}");
-                await hubContext.Clients.Client(connectionId).SendAsync("OrderCompleteNotification",order.ToDto());
+                await hubContext.Clients.Client(connectionId).SendAsync("OrderCompleteNotification", order.ToDto());
             }
         }
     }

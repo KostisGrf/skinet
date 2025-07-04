@@ -33,6 +33,13 @@ public class PaymentsController(IPaymentService service,
         return Ok(cart);
     }
 
+    [HttpGet("test-log")]
+public IActionResult TestLog()
+{
+    logger.LogInformation("🚀 Log stream is working!");
+    return Ok("Logged to Azure");
+}
+
     [HttpGet("delivery-methods")]
     public async Task<ActionResult<IReadOnlyList<DeliveryMethod>>> getDeliveryMethods()
     {

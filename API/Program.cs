@@ -38,6 +38,7 @@ builder.Services.AddSignalR();
 
 
 //for logging
+
 builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
 builder.WebHost
@@ -45,7 +46,8 @@ builder.WebHost
     .UseSetting("detailedErrors", "true");
 
 var app = builder.Build();
-
+var logger = app.Services.GetRequiredService<ILogger<Program>>();
+logger.LogInformation("🔥 App started and logging works!");
 // Configure the HTTP request pipeline.
 
 

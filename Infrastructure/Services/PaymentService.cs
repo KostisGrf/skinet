@@ -70,7 +70,7 @@ public class PaymentService(IConfiguration config, ICartService cartService,
 
         if (coupon.AmountOff.HasValue)
         {
-            amount -= (long)coupon.AmountOff * 100;
+            amount -= (long)coupon.AmountOff  ;
         }
         if (coupon.PercentOff.HasValue)
         {

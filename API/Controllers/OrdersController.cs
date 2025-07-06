@@ -9,6 +9,7 @@ using Core.Specifications;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
+
 namespace API.Controllers;
 
 
@@ -60,6 +61,7 @@ public class OrdersController(ICartService cartService, IUniteOfWork unit) : Bas
             DeliveryMethod = deliveryMethod,
             ShippingAddress = orderDto.ShippingAddress,
             Subtotal = items.Sum(x => x.Price * x.Quantity),
+            Discount = orderDto.Discount,
             PaymentSummary = orderDto.PaymentSummary,
             PaymentIntentId = cart.PaymentIntentId,
             buyerEmail = email

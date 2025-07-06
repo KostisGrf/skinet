@@ -35,6 +35,7 @@ builder.Services.AddAuthorization();
 builder.Services.AddIdentityApiEndpoints<AppUser>().AddEntityFrameworkStores<StoreContext>();
 builder.Services.AddScoped<IPaymentService, PaymentService>();
 builder.Services.AddSignalR();
+builder.Services.AddScoped<ICouponService, CouponService>();
 
 
 //for logging
@@ -46,9 +47,7 @@ builder.WebHost
     .UseSetting("detailedErrors", "true");
 
 var app = builder.Build();
-var logger = app.Services.GetRequiredService<ILogger<Program>>();
-logger.LogInformation("🔥 App started and logging works!");
-// Configure the HTTP request pipeline.
+
 
 
 app.UseMiddleware<ExceptionMiddleware>();

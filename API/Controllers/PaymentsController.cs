@@ -33,13 +33,6 @@ public class PaymentsController(IPaymentService service,
         return Ok(cart);
     }
 
-    [HttpGet("testlog")]
-public IActionResult TestLog()
-{
-    logger.LogInformation("🚀 Log stream is working!");
-    return Ok("Logged to Azure");
-}
-
     [HttpGet("delivery-methods")]
     public async Task<ActionResult<IReadOnlyList<DeliveryMethod>>> getDeliveryMethods()
     {
@@ -88,12 +81,13 @@ public IActionResult TestLog()
             var order = await unit.Repository<Core.Entities.OrderAggregate.Order>().GetEntityWithSpec(spec)
                 ?? throw new Exception("Order not found");
 
-            logger.LogInformation("Resolved connectionId: for email: {Email}", order.buyerEmail);
+            var orderTotalInCents = (long)Math.Round(order.GetTotal() * 100,
+                MidpointRounding.AwayFromZero);
 
-            if ((long)order.GetTotal() * 100 != intent.Amount)
+            if (orderTotalInCents != intent.Amount)
             {
                 order.Status = OrderStatus.PaymentMisMatch;
-            }
+            }    
             else
             {
                 order.Status = OrderStatus.PaymentReceived;
@@ -101,13 +95,10 @@ public IActionResult TestLog()
 
             await unit.Complete();
 
-            logger.LogInformation($"database updated");
-
             var connectionId = NotificationHub.GetConnectionIdByEmail(order.buyerEmail);
 
             if (!string.IsNullOrEmpty(connectionId))
             {
-                logger.LogInformation($"Sending OrderCompleteNotification to connectionId: {connectionId}");
                 await hubContext.Clients.Client(connectionId).SendAsync("OrderCompleteNotification", order.ToDto());
             }
         }

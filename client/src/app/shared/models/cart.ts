@@ -6,7 +6,16 @@ export type CartType={
     deliveryMethodId?:number;
     paymentIntentId?:string;
     clientSecret?:string
+    coupon?:Coupon
 
+}
+
+export interface Coupon{
+  name:string
+  amountOff:number
+  percentOff:number
+  PromotionCode:string
+  couponId:string
 }
 
 export type CartItem={
@@ -24,5 +33,6 @@ export class Cart implements CartType{
     items: CartItem[]=[];
     deliveryMethodId?:number;
     paymentIntentId?:string;
-    clientSecret?:string
+    clientSecret?:string;
+    coupon?: Coupon;
 }

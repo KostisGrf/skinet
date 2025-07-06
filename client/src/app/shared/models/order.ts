@@ -9,6 +9,7 @@ export interface Order {
   shippingPrice: number
   paymentSummary: PaymentSummary
   orderItems: OrderItem[]
+  discount?:number
   subtotal: number
   status: string
   total: number
@@ -24,6 +25,8 @@ export interface ShippingAddress {
   postalCode: string
   country: string
 }
+
+
 
 export interface PaymentSummary {
   last4: number
@@ -45,4 +48,5 @@ export interface OrderToCreate{
     deliveryMethodId:number
     shippingAddress:ShippingAddress
     PaymentSummary:PaymentSummary
+    discount?:number
 }

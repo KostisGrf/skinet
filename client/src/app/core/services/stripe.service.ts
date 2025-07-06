@@ -26,6 +26,7 @@ export class StripeService {
 
   getStripeInstance() {
     return this.stripePromise;
+    
   }
 
    async initializeElements(){
@@ -126,9 +127,9 @@ export class StripeService {
     const hasClientSecret=!!cart?.clientSecret;
     if(!cart) throw new Error('problem with cart');
     return this.http.post<Cart>(this.baseUrl + 'payments/'+cart.id,{}).pipe(
-      map(cart=>{
+      map(async cart=>{
         if(!hasClientSecret){
-          this.cartService.setCart(cart);
+          await firstValueFrom(this.cartService.setCart(cart));
           return cart
         }
         return cart

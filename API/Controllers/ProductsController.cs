@@ -5,6 +5,7 @@ using Core.Entities;
 using Core.Interfaces;
 using Core.Specifications;
 using Infrastructure.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Mono.TextTemplating;
@@ -32,6 +33,7 @@ public class ProductsController(IUniteOfWork unit):BaseApiController
         return product;
     }
 
+    [Authorize(Roles = "Admin")]
     [HttpPost]
     public async Task<ActionResult<Product>> CreateProduct(Product product){
         unit.Repository<Product>().Add(product);
@@ -42,6 +44,7 @@ public class ProductsController(IUniteOfWork unit):BaseApiController
         return BadRequest("Problem creating product");  
         }
 
+    [Authorize(Roles = "Admin")]
     [HttpPut("{id:int}")]
     public async Task<ActionResult> UpdateProduct(int id,Product product){
         if (product.Id!=id||!ProductExists(id)) 
@@ -58,16 +61,19 @@ public class ProductsController(IUniteOfWork unit):BaseApiController
 
     [HttpDelete("{id:int}")]
 
-    public async Task<ActionResult> DeleteProduct(int id){
-        var product=await unit.Repository<Product>().GetByIdAsync(id);
+    [Authorize(Roles = "Admin")]
+    public async Task<ActionResult> DeleteProduct(int id)
+    {
+        var product = await unit.Repository<Product>().GetByIdAsync(id);
 
-        if (product==null) return NotFound();
+        if (product == null) return NotFound();
 
         unit.Repository<Product>().Remove(product);
-        if(await unit.Complete()){
+        if (await unit.Complete())
+        {
             return NoContent();
         }
-       return BadRequest("Problem deleting the product");
+        return BadRequest("Problem deleting the product");
     }
 
     [HttpGet("brands")]

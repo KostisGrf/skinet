@@ -10,6 +10,7 @@
                 Home</a>
             <a routerLink="/shop" routerLinkActive="active">Shop</a>
             <a routerLink="/test-error" routerLinkActive="active">Errors</a>
+            <a *appIsAdmin routerLink="/admin" routerLinkActive="active">Admin</a>
         </nav>
         <div class="flex gap-3 align-middle">
             <a routerLink="/cart" routerLinkActive="active" 
@@ -18,7 +19,7 @@
             </a>
             @if (accountService.currentUser()){
                 <button mat-button [mat-menu-trigger-for]="menu">
-                    <mat-icon>arrow_drop_menu</mat-icon>
+                    <mat-icon>arrow_drop_down</mat-icon>
                     <span>{{accountService.currentUser()?.email}}</span>
                 </button>
             }@else {

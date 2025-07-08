@@ -21,8 +21,7 @@ export class SignalrService {
       })
       .withAutomaticReconnect()
       .build()
-      console.log("its ok");
-
+  
       this.hubConnection.start()
         .catch(error=>console.log(error));
 

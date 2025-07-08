@@ -24,7 +24,7 @@ import { OrderService } from '../../../core/services/order.service';
   templateUrl: './checkout-success.component.html',
   styleUrl: './checkout-success.component.scss'
 })
-export class CheckoutSuccessComponent implements OnDestroy ,OnInit  {
+export class CheckoutSuccessComponent implements OnDestroy {
    private signalRService=inject(SignalrService);
    private orderService=inject(OrderService);
    order=this.signalRService.orderSignal();
@@ -38,13 +38,6 @@ export class CheckoutSuccessComponent implements OnDestroy ,OnInit  {
                 });}
 
    
-
-    
-   
-
-   ngOnInit(): void {
-       console.log("hellooooo")
-   }
 
    ngOnDestroy(): void {
        this.orderService.orderComplete=false;

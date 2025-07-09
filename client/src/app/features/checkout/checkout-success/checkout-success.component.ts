@@ -1,9 +1,9 @@
-import { Component, effect, inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, effect, inject, OnDestroy } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { RouterLink } from '@angular/router';
 import { SignalrService } from '../../../core/services/signalr.service';
 import { AddressPipe } from '../../../shared/pipes/address.pipe';
-import { CurrencyPipe, DatePipe, NgIf } from '@angular/common';
+import { CurrencyPipe, DatePipe } from '@angular/common';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { PaymentPipe } from '../../../shared/pipes/payment.pipe';
 import { OrderService } from '../../../core/services/order.service';
@@ -17,10 +17,8 @@ import { OrderService } from '../../../core/services/order.service';
     AddressPipe,
     CurrencyPipe,
     DatePipe,
-    PaymentPipe,
-    NgIf
-
-  ],
+    PaymentPipe
+],
   templateUrl: './checkout-success.component.html',
   styleUrl: './checkout-success.component.scss'
 })

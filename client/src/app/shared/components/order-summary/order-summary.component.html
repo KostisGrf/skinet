@@ -40,12 +40,15 @@
             <label class="mb-2 block text-sm font-medium">
                 Do you have a voucher code?
             </label>
-            <div *ngIf="cartService.cart()?.coupon as coupon" class="flex justify-between align-middle items-center my-1">
+            @if(cartService.cart()?.coupon; as coupon){
+                 <div class="flex justify-between align-middle items-center my-1">
                 <span class="text-sm font-semibold">{{coupon.name}} applied</span>
                 <button (click)="removeCouponCode()" mat-icon-button>
                     <mat-icon class="text-red-500">delete</mat-icon>
                 </button>
-            </div>
+                </div>
+            }
+           
             <mat-form-field appearance="outline">
                 <mat-label>Voucher code</mat-label>
                 <input 

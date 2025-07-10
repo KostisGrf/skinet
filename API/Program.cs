@@ -15,8 +15,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
-builder.Services.AddDbContext<StoreContext>(opt=>{
-    opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+builder.Services.AddDbContext<StoreContext>(opt => {
+    opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"),
+        sql => sql.EnableRetryOnFailure());
 });
 builder.Services.AddScoped<IProductRepository,ProductsRepository>();
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
@@ -80,13 +81,38 @@ try
     var context = services.GetRequiredService<StoreContext>();
     var userManager = services.GetRequiredService<UserManager<AppUser>>();
     var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
-    await context.Database.MigrateAsync();
-    await StoreContextSeed.SeedAsync(context,userManager,roleManager);
+
+
+    const int maxRetries = 3;
+    var retries = 0;
+    bool migrated = false;
+
+    while (!migrated && retries < maxRetries)
+    {
+        try
+        {
+            await context.Database.MigrateAsync();
+            await StoreContextSeed.SeedAsync(context, userManager, roleManager);
+            migrated = true;
+        }
+        catch (Exception ex)
+        {
+            retries++;
+            Console.WriteLine($"Migration failed (attempt {retries}): {ex.Message}");
+            await Task.Delay(2000); // wait 2 seconds before retry
+        }
+    }
+
+    if (!migrated)
+    {
+        Console.WriteLine("Migration failed after retries. Skipping...");
+    }
+
 }
 catch (Exception ex)
 {
-    Console.WriteLine(ex);
-    throw;
+    Console.WriteLine("Critical startup error: " + ex);
+
 }
 
 app.Run();

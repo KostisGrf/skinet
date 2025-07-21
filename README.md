@@ -8,6 +8,10 @@ Skinet is an e-commerce web application focused on ski products. It was develope
 **Live Demo:**  
 [Skinet Live Page](https://skinet-kg.azurewebsites.net/)  
 
+**Note:** If the live page is not working, the Azure free hosting plan may have exceeded its usage limits (such as CPU, bandwidth, or uptime quota).
+
+You can still check out the project by watching the demo video here: [Watch Demo Video](https://www.youtube.com/watch?v=itspAdsvwBs)
+
 
 ---
 
